@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://ylpow3xedrrx"]
+
+[ext_resource type="FontFile" uid="uid://8xrspsog587g" path="res://fonts/Xolonium-Regular.ttf" id="1_47wux"]
+[ext_resource type="Script" path="res://HelpScreen.cs" id="1_i40yr"]
+
+[node name="Help Screen" type="CanvasLayer"]
+script = ExtResource("1_i40yr")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 464.0
+offset_bottom = 704.0
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 443.0
+offset_bottom = 378.0
+size_flags_horizontal = 4
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_47wux")
+theme_override_font_sizes/font_size = 64
+text = "Main Menu"
+
+[node name="Controls Section" type="VBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="Controls" type="Label" parent="VBoxContainer2/Controls Section"]
+z_index = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_47wux")
+theme_override_font_sizes/font_size = 44
+text = "Controls
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/Controls Section"]
+layout_mode = 2
+
+[node name="Controller Section" type="VBoxContainer" parent="VBoxContainer2/Controls Section/HBoxContainer"]
+layout_mode = 2
+
+[node name="Section Title" type="Label" parent="VBoxContainer2/Controls Section/HBoxContainer/Controller Section"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_47wux")
+theme_override_font_sizes/font_size = 34
+text = "Controller
+"
+
+[node name="Body" type="Label" parent="VBoxContainer2/Controls Section/HBoxContainer/Controller Section"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Use the left joystick to move, up, down, left or right."
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/Controls Section/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Keyboard Section" type="VBoxContainer" parent="VBoxContainer2/Controls Section/HBoxContainer"]
+layout_mode = 2
+
+[node name="Section Title" type="Label" parent="VBoxContainer2/Controls Section/HBoxContainer/Keyboard Section"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_47wux")
+theme_override_font_sizes/font_size = 34
+text = "Keyboard
+"
+
+[node name="Body" type="Label" parent="VBoxContainer2/Controls Section/HBoxContainer/Keyboard Section"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Use the WASD keys to move:
+W: up
+A: left
+S: down
+D: right"
+autowrap_mode = 2
+
+[node name="Settings Section" type="VBoxContainer" parent="."]
+offset_left = 144.0
+offset_top = 448.0
+offset_right = 338.0
+offset_bottom = 563.0
+size_flags_horizontal = 4
+metadata/_edit_group_ = true
+
+[node name="Section Title" type="Label" parent="Settings Section"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_47wux")
+theme_override_font_sizes/font_size = 44
+text = "Settings"
+
+[node name="Mute Button" type="CheckButton" parent="Settings Section"]
+z_index = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_47wux")
+theme_override_font_sizes/font_size = 34
+text = "Mute"
+
+[node name="Back Button" type="Button" parent="."]
+offset_left = 176.0
+offset_top = 624.0
+offset_right = 298.0
+offset_bottom = 685.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_47wux")
+theme_override_font_sizes/font_size = 44
+text = "Back"
+
+[connection signal="toggled" from="Settings Section/Mute Button" to="." method="OnMuteButtonToggled"]
+[connection signal="pressed" from="Back Button" to="." method="OnBackButtonPressed"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://coirxehgmlnmp"]
+[gd_scene load_steps=6 format=3 uid="uid://coirxehgmlnmp"]
 
 [ext_resource type="Script" path="res://Hud.cs" id="1_4sp1q"]
 [ext_resource type="FontFile" uid="uid://8xrspsog587g" path="res://fonts/Xolonium-Regular.ttf" id="2_y54v0"]
+[ext_resource type="PackedScene" uid="uid://ylpow3xedrrx" path="res://help_screen.tscn" id="3_xa4ci"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_g015y"]
 action = &"start_game"
@@ -11,6 +12,10 @@ events = [SubResource("InputEventAction_g015y")]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_4sp1q")
+
+[node name="Help Screen" parent="." instance=ExtResource("3_xa4ci")]
+layer = 2
+visible = false
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 5
@@ -48,10 +53,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -140.0
-offset_right = 100.0
-offset_bottom = -40.0
+offset_left = -224.0
+offset_top = -136.0
+offset_right = -24.0
+offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_y54v0")
@@ -64,5 +69,18 @@ text = "Start
 wait_time = 2.0
 one_shot = true
 
+[node name="Menu Button" type="Button" parent="."]
+custom_minimum_size = Vector2(200, 100)
+offset_left = 263.0
+offset_top = 584.0
+offset_right = 463.0
+offset_bottom = 684.0
+theme_override_fonts/font = ExtResource("2_y54v0")
+theme_override_font_sizes/font_size = 64
+text = "Menu
+"
+
+[connection signal="ToggleMute" from="Help Screen" to="." method="OnToggleMute"]
 [connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="OnMessageTimerTimeout"]
+[connection signal="pressed" from="Menu Button" to="." method="OnMenuButtonPressed"]

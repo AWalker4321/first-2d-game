@@ -7,6 +7,7 @@ public partial class Main : Node
 	public PackedScene MobScene { get; set; }
 
 	private int _score;
+	private bool mute = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -23,8 +24,10 @@ public partial class Main : Node
 
 		GetNode<Hud>("HUD").ShowGameOver();
 
-		GetNode<AudioStreamPlayer>("Music").Stop();
-		GetNode<AudioStreamPlayer>("Death").Play();
+		if (!mute) {
+			GetNode<AudioStreamPlayer>("Music").Stop();
+			GetNode<AudioStreamPlayer>("Death").Play();
+		}
 	}
 
 	public void NewGame() {
@@ -42,7 +45,9 @@ public partial class Main : Node
 
 		GetTree().CallGroup("mobs", Node.MethodName.QueueFree);
 
-		GetNode<AudioStreamPlayer>("Music").Play();
+		if (!mute) {
+			GetNode<AudioStreamPlayer>("Music").Play();
+		}
 	}
 
 	private void OnScoreTimerTimeout() {
@@ -84,5 +89,10 @@ public partial class Main : Node
 
 		//Spawn the mob by adding it to the Main scene.
 		AddChild(mob);
+	}
+
+	private void OnToggleMute() {
+		GD.Print("Main got toggle mute signal");
+		mute = !mute;
 	}
 }

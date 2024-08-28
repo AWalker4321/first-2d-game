@@ -5,6 +5,9 @@ public partial class Hud : CanvasLayer
 {
 	[Signal]
 	public delegate void StartGameEventHandler();
+	[Signal]
+	public delegate void ToggleMuteEventHandler();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -35,6 +38,7 @@ public partial class Hud : CanvasLayer
 
 		await ToSignal(GetTree().CreateTimer(1.0), SceneTreeTimer.SignalName.Timeout);
 		GetNode<Button>("StartButton").Show();
+		GetNode<Button>("Menu Button").Show();
 	}
 
 	public void UpdateScore(int score) {
@@ -43,10 +47,20 @@ public partial class Hud : CanvasLayer
 
 	private void OnStartButtonPressed() {
 		GetNode<Button>("StartButton").Hide();
+		GetNode<Button>("Menu Button").Hide();
 		EmitSignal(SignalName.StartGame);
 	}
 
 	private void OnMessageTimerTimeout() {
 		GetNode<Label>("Message").Hide();
+	}
+
+	private void OnMenuButtonPressed() {
+		GetNode<CanvasLayer>("Help Screen").Show();
+	}
+
+	private void OnToggleMute() {
+		GD.Print("Hud got toggle mute signal");
+		EmitSignal(SignalName.ToggleMute);
 	}
 }

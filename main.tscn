@@ -65,3 +65,4 @@ stream = ExtResource("5_dgsl3")
 [connection signal="timeout" from="ScoreTimer" to="." method="OnScoreTimerTimeout"]
 [connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
 [connection signal="StartGame" from="HUD" to="." method="NewGame"]
+[connection signal="ToggleMute" from="HUD" to="." method="OnToggleMute"]
